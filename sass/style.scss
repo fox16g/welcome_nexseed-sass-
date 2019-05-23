@@ -1,7 +1,3 @@
-// 何を変数にして何をmixinでまとめるかを考える
-// できるだけまとめたあとでガッツリ書いていく
-// welcomeからcurriculumまでを完成させる
-
 $breakpoints:(
 	sp: "only screen and (max-width:480px)",
 	tb: "only screen and (max-width:960px)",
@@ -16,29 +12,21 @@ $breakpoints:(
 			@error "$breakpointsに#{$breakpoint}というキーはありません"
 		}
 }
-
 $ultramarine:#548FBD;
-$white:#fff;
-@mixin form($h:120px,$w:400px,$bs:border-box,$fs:16px){
-	height: $h;
-	width: $w;
-	box-sizing: $bs;
-	font-size: $fs;
-}
-@mixin flex{
-	display:flex;
-}
 @mixin justify($a,$b,$c){
+	// flexを含む時に使う関数
 	display:flex;
 	justify-content: $a;
 	text-align:$b;
 	align-items: $c;
 }
-@mixin font($fsize: 28px,$weight: bold){
+@mixin font($fsize,$weight){
+	// fontの太さや大きさを変更する関数
 	font-size: $fsize;
 	font-weight: $weight;
 }
 @mixin hw($h,$w){
+	// 縦横を指定する時に使う関数
 	height:$h;
 	width:$w; 
 }
@@ -46,12 +34,18 @@ $white:#fff;
 	background-color: $bg-color;
 	border: $border;
 }
-@mixin flex-center{
-	@include flex;
-	justify-content: center;
-	text-align: center;
+@mixin color($bg-color,$color){
+	// 色を指定したい時に使う関数
+	background-color: $bg-color;
+	color: $color;
 }
-
+@mixin form($h:120px,$w:400px,$bs:border-box,$fs:16px){
+	// formのサイズ指定
+	height: $h;
+	width: $w;
+	box-sizing: $bs;
+	font-size: $fs;
+}
 // headerここから
 .fixed{
 	position: fixed;
@@ -62,16 +56,14 @@ $white:#fff;
 	margin-top:70px;
 }
 header{
-	@include flex;
-	justify-content: space-between;
-	color:$white;
+	@include justify(space-between,none,none);
+	@include color(#1dace0,#fff);
 	font-size:18px;
 	padding:5px 0;
-	background-color:#1dace0;
+	color: #fff;
 }
 .header-right{
-	@include flex;
-	align-items: center;
+	@include justify(none,none,center);
 	margin-right:80px;
 	@include mediaq(sp){
 		display: none;
@@ -80,10 +72,8 @@ header{
 		margin-right:20px;
 	}
 }
-
 .icon{
-	@include flex;
-	align-items: center;
+	@include justify(null,null,center);
 	margin-left: 80px;
 	@include mediaq(tb){
 	margin-left: 20px;
@@ -101,7 +91,6 @@ header{
 	}
 }
 // headerここまで
-
 // welcomeここから
 body{
 	@include mediaq(sp){
@@ -109,53 +98,45 @@ body{
 	}
 }
 .welcome{
-	@include flex;
-	justify-content: center;
-	text-align: center;
+	@include justify(center,center,null);
 	flex-direction: column;
-	background:{
-	image: url(../img/background1.jpg);
-	repeat: no-repeat;
-	attachment: fixed;
-	size:cover;
-	};
-	color:$white;
+	color:#fff;
 	height: 100vh;
+	background:{
+		image: url(../img/background1.jpg);
+		repeat: no-repeat;
+		attachment: fixed;
+		size:cover;
+	};
 }
 .title{
 	font-size: 64px;
 	@include mediaq(sp){
 		font-size: 30px;
 	}
-
 }
-
 .guidline{
-	@include font();
+	@include font(28px,bold);
 	margin-top: 50px;
 	@include mediaq(sp){
+		@include font(24px,normal);
 		margin-top: 30px;
-		font-size: 24px;
-		font-weight: normal;
 	}
 	li:not(:first-child){
 		margin-top: 16px;
 	}
 }
 .btn{
-	@include font();
+	@include font(28px,bold);
 	@include hw(55px,170px);
-	color: $white;
+	color: #fff;
 	cursor:pointer;
 	margin-left: 120px;
 	border-radius: 10px;
 	@include mediaq(sp){
-		margin-left: 0px;
-		font-weight: bold;
-		font-size: 24px;
-		margin-top: 20px;
-		height: 48px;
-		width: 40%;
+		@include font(24px,bold);
+		@include hw(48px,40%);
+		margin: 20px 0px 0px 0px;
 	}
 	&:first-child{
 		margin-left: 0px;
@@ -167,9 +148,8 @@ body{
 .btn-group{
 	margin-top: 60px;
 	@include mediaq(sp){
-		display: flex;
+		@include justify(null,null,center);
 		flex-flow: column nowrap;
-		align-items: center;
 		margin-top: 40px;
 	}
 }
@@ -182,11 +162,10 @@ body{
 .login{
 	@include bg(rgba(236,227,35,.5),3px solid rgba(236,227,35,.3));
 	&:hover{
-		background: rgb(236,227,35);
+		background-color: rgb(236,227,35);
 	}
 }
 // welcomeここまで
-
 // curriculumここから
 .curriculum{
 	margin-top: 50px;
@@ -197,8 +176,7 @@ body{
 	text-align:center;
 }
 .img-box{
-	@include flex;
-	justify-content: center;
+	@include justify(center,null,null);
 	margin-top: 50px;
 	@include mediaq(pc){
 		justify-content: space-around;
@@ -208,19 +186,18 @@ body{
 		align-content: space-around;
 	}
 	li{
-		@include flex;
+		display: flex;
 		flex-direction: column;
 		@include mediaq(pc){
 			margin-right: 30px;
 		}
 		@include mediaq(tb){
-			margin-top: 30px;
-			margin-right: 0px;
+			margin:30px 0px 0px 0px;
 		}
 		&:nth-child(2){
 			margin: 0 60px;
 			@include mediaq(tb){
-				margin-top:30px;
+				margin:30px 0px 0px 0px;
 			}
 		}
 	}
@@ -228,30 +205,27 @@ body{
 		@include hw(300px,300px);
 		}
 	span{
-		text-align: center;
 		font-size: 24px;
+		text-align: center;
 		margin-top: 20px;
 	}
 }
 // curriculumここまで
 // contact ここから
-
 .contact{
-	@include flex-center;
+	@include justify(center,center,null);
 	flex-direction: column;
 	height: 350px;
 	margin-top:30px;
 	padding-top:50px;
 	background-color: #C4C4C4;
-
 	@include mediaq(tb){
 		height:100%;
 		padding: 40px 20px;
 	}
 	.form{
 		margin: 30px 0px 40px;
-		display: flex;
-		justify-content: center;
+		@include justify(center,null,null);
 		@include mediaq(tb){
 			flex-flow:column nowrap;
 			margin: 30px 0;
@@ -259,8 +233,7 @@ body{
 		.form-left{
 			margin-right: 50px;
 			@include mediaq(tb){
-				margin-right:0;
-				margin-bottom: 30px;
+				margin:0px 0px 30px 0px;
 			}
 			.name{
 				@include form;
@@ -279,49 +252,37 @@ body{
 			}
 		}
 		.inquiry{
-			@include hw(120px,400px);
-			box-sizing: border-box;
-			font-size:16px;
+			@include form(120px,400px,border-box,16px);
 			@include mediaq(tb){
 					width: 80%;
 			}
 		}
 		button{
-			font-size:20px;
+			@include form(null,null,border-box,20px);
 			padding: 5px 40px;
-			box-sizing: border-box;
 			text-align: center;
 		}
 	}
 	.submit{
-		color: $white;
-		background-color: $ultramarine;
-		height:50px;
-		font-size: 18px;
-		border-radius: 10px;
+		@include color($ultramarine,#fff);
+		@include form(50px,null,border-box,18px);
 		border:2px solid $ultramarine;
-		box-sizing: border-box;
+		border-radius: 10px;
 		transition-duration: 500ms;
 		padding: 10px 20px;
 		&:hover{
-		background-color: $white;
-		color:$ultramarine;
+		@include color(#fff,$ultramarine);
 		border-color: $ultramarine;
 		transition-duration: 500ms;
 		}
 	}
 }
 // contactここまで
-
-
 footer{
-	@include flex-center;
-	justify-content: space-between;
-	align-items: center;
+	@include justify(space-between,center,center);
+	@include color(#233f51,#fff);
 	font-size: 18px;
 	padding-top: 5px;
-	color: #fff;
-	background-color: #233f51;
 	@include mediaq(sp){
 		justify-content: center;
 	}

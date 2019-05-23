@@ -11,14 +11,19 @@
 header {
   display: flex;
   justify-content: space-between;
+  text-align: none;
+  align-items: none;
+  background-color: #1dace0;
   color: #fff;
   font-size: 18px;
   padding: 5px 0;
-  background-color: #1dace0;
+  color: #fff;
 }
 
 .header-right {
   display: flex;
+  justify-content: none;
+  text-align: none;
   align-items: center;
   margin-right: 80px;
 }
@@ -70,12 +75,12 @@ header {
   justify-content: center;
   text-align: center;
   flex-direction: column;
+  color: #fff;
+  height: 100vh;
   background-image: url(../img/background1.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  color: #fff;
-  height: 100vh;
 }
 
 .title {
@@ -96,9 +101,9 @@ header {
 
 @media only screen and (max-width: 480px) {
   .guidline {
-    margin-top: 30px;
     font-size: 24px;
     font-weight: normal;
+    margin-top: 30px;
   }
 }
 
@@ -119,12 +124,11 @@ header {
 
 @media only screen and (max-width: 480px) {
   .btn {
-    margin-left: 0px;
-    font-weight: bold;
     font-size: 24px;
-    margin-top: 20px;
+    font-weight: bold;
     height: 48px;
     width: 40%;
+    margin: 20px 0px 0px 0px;
   }
 }
 
@@ -145,8 +149,8 @@ header {
 @media only screen and (max-width: 480px) {
   .btn-group {
     display: flex;
-    flex-flow: column nowrap;
     align-items: center;
+    flex-flow: column nowrap;
     margin-top: 40px;
   }
 }
@@ -166,7 +170,7 @@ header {
 }
 
 .login:hover {
-  background: #ece323;
+  background-color: #ece323;
 }
 
 .curriculum {
@@ -212,8 +216,7 @@ header {
 
 @media only screen and (max-width: 960px) {
   .img-box li {
-    margin-top: 30px;
-    margin-right: 0px;
+    margin: 30px 0px 0px 0px;
   }
 }
 
@@ -223,7 +226,7 @@ header {
 
 @media only screen and (max-width: 960px) {
   .img-box li:nth-child(2) {
-    margin-top: 30px;
+    margin: 30px 0px 0px 0px;
   }
 }
 
@@ -233,8 +236,8 @@ header {
 }
 
 .img-box span {
-  text-align: center;
   font-size: 24px;
+  text-align: center;
   margin-top: 20px;
 }
 
@@ -275,8 +278,7 @@ header {
 
 @media only screen and (max-width: 960px) {
   .contact .form .form-left {
-    margin-right: 0;
-    margin-bottom: 30px;
+    margin: 0px 0px 30px 0px;
   }
 }
 
@@ -325,20 +327,20 @@ header {
 }
 
 .contact .form button {
+  box-sizing: border-box;
   font-size: 20px;
   padding: 5px 40px;
-  box-sizing: border-box;
   text-align: center;
 }
 
 .contact .submit {
-  color: #fff;
   background-color: #548FBD;
+  color: #fff;
   height: 50px;
-  font-size: 18px;
-  border-radius: 10px;
-  border: 2px solid #548FBD;
   box-sizing: border-box;
+  font-size: 18px;
+  border: 2px solid #548FBD;
+  border-radius: 10px;
   transition-duration: 500ms;
   padding: 10px 20px;
 }
@@ -352,14 +354,13 @@ header {
 
 footer {
   display: flex;
-  justify-content: center;
-  text-align: center;
   justify-content: space-between;
+  text-align: center;
   align-items: center;
+  background-color: #233f51;
+  color: #fff;
   font-size: 18px;
   padding-top: 5px;
-  color: #fff;
-  background-color: #233f51;
 }
 
 @media only screen and (max-width: 480px) {
