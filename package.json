@@ -1,0 +1,24 @@
+{
+  "name": "welcome_nexceed",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fox16g/welcome_nexseed.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fox16g/welcome_nexseed/issues"
+  },
+  "homepage": "https://github.com/fox16g/welcome_nexseed#readme",
+  "devDependencies": {
+    "gulp-sass": "^4.0.2"
+  },
+  "dependencies": {},
+  "description": ""
+}

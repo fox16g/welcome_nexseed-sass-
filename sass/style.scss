@@ -1,0 +1,339 @@
+// 何を変数にして何をmixinでまとめるかを考える
+// できるだけまとめたあとでガッツリ書いていく
+// welcomeからcurriculumまでを完成させる
+
+$breakpoints:(
+	sp: "only screen and (max-width:480px)",
+	tb: "only screen and (max-width:960px)",
+	pc: "only screen and (max-width:1280px)",
+);
+@mixin mediaq($breakpoint){
+	@if map-has-key($breakpoints,$breakpoint){
+		@media #{map-get($breakpoints, $breakpoint)}{
+			@content;
+			}
+		}@else {
+			@error "$breakpointsに#{$breakpoint}というキーはありません"
+		}
+}
+
+$ultramarine:#548FBD;
+$white:#fff;
+@mixin form($h:120px,$w:400px,$bs:border-box,$fs:16px){
+	height: $h;
+	width: $w;
+	box-sizing: $bs;
+	font-size: $fs;
+}
+@mixin flex{
+	display:flex;
+}
+@mixin justify($a,$b,$c){
+	display:flex;
+	justify-content: $a;
+	text-align:$b;
+	align-items: $c;
+}
+@mixin font($fsize: 28px,$weight: bold){
+	font-size: $fsize;
+	font-weight: $weight;
+}
+@mixin hw($h,$w){
+	height:$h;
+	width:$w; 
+}
+@mixin bg($bg-color,$border){
+	background-color: $bg-color;
+	border: $border;
+}
+@mixin flex-center{
+	@include flex;
+	justify-content: center;
+	text-align: center;
+}
+
+// headerここから
+.fixed{
+	position: fixed;
+	width:100%;
+	margin-top: -70px;
+}
+#margin-for-fixed{
+	margin-top:70px;
+}
+header{
+	@include flex;
+	justify-content: space-between;
+	color:$white;
+	font-size:18px;
+	padding:5px 0;
+	background-color:#1dace0;
+}
+.header-right{
+	@include flex;
+	align-items: center;
+	margin-right:80px;
+	@include mediaq(sp){
+		display: none;
+	}
+	& li:first-child{
+		margin-right:20px;
+	}
+}
+
+.icon{
+	@include flex;
+	align-items: center;
+	margin-left: 80px;
+	@include mediaq(tb){
+	margin-left: 20px;
+	}
+	img{
+		height:60px;
+	}
+	.name strong{
+		color:#eae51f;
+	}
+	span{
+		@include mediaq(sp){
+			display: none;
+		}
+	}
+}
+// headerここまで
+
+// welcomeここから
+body{
+	@include mediaq(sp){
+		min-width: 375px;
+	}
+}
+.welcome{
+	@include flex;
+	justify-content: center;
+	text-align: center;
+	flex-direction: column;
+	background:{
+	image: url(../img/background1.jpg);
+	repeat: no-repeat;
+	attachment: fixed;
+	size:cover;
+	};
+	color:$white;
+	height: 100vh;
+}
+.title{
+	font-size: 64px;
+	@include mediaq(sp){
+		font-size: 30px;
+	}
+
+}
+
+.guidline{
+	@include font();
+	margin-top: 50px;
+	@include mediaq(sp){
+		margin-top: 30px;
+		font-size: 24px;
+		font-weight: normal;
+	}
+	li:not(:first-child){
+		margin-top: 16px;
+	}
+}
+.btn{
+	@include font();
+	@include hw(55px,170px);
+	color: $white;
+	cursor:pointer;
+	margin-left: 120px;
+	border-radius: 10px;
+	@include mediaq(sp){
+		margin-left: 0px;
+		font-weight: bold;
+		font-size: 24px;
+		margin-top: 20px;
+		height: 48px;
+		width: 40%;
+	}
+	&:first-child{
+		margin-left: 0px;
+		@include mediaq(sp){
+			margin-top: 0px;
+		}
+	}
+}
+.btn-group{
+	margin-top: 60px;
+	@include mediaq(sp){
+		display: flex;
+		flex-flow: column nowrap;
+		align-items: center;
+		margin-top: 40px;
+	}
+}
+.register{
+	@include bg(rgba(29,172,224,.5),3px solid rgba(29,172,224,.3));
+	&:hover{
+		background-color: rgb(29,172,224);
+	}
+}
+.login{
+	@include bg(rgba(236,227,35,.5),3px solid rgba(236,227,35,.3));
+	&:hover{
+		background: rgb(236,227,35);
+	}
+}
+// welcomeここまで
+
+// curriculumここから
+.curriculum{
+	margin-top: 50px;
+}
+.sub-title{
+	@include font(36px,none);
+	margin:20px 0;
+	text-align:center;
+}
+.img-box{
+	@include flex;
+	justify-content: center;
+	margin-top: 50px;
+	@include mediaq(pc){
+		justify-content: space-around;
+	}
+	@include mediaq(tb){
+		flex-wrap: wrap;
+		align-content: space-around;
+	}
+	li{
+		@include flex;
+		flex-direction: column;
+		@include mediaq(pc){
+			margin-right: 30px;
+		}
+		@include mediaq(tb){
+			margin-top: 30px;
+			margin-right: 0px;
+		}
+		&:nth-child(2){
+			margin: 0 60px;
+			@include mediaq(tb){
+				margin-top:30px;
+			}
+		}
+	}
+	img{
+		@include hw(300px,300px);
+		}
+	span{
+		text-align: center;
+		font-size: 24px;
+		margin-top: 20px;
+	}
+}
+// curriculumここまで
+// contact ここから
+
+.contact{
+	@include flex-center;
+	flex-direction: column;
+	height: 350px;
+	margin-top:30px;
+	padding-top:50px;
+	background-color: #C4C4C4;
+
+	@include mediaq(tb){
+		height:100%;
+		padding: 40px 20px;
+	}
+	.form{
+		margin: 30px 0px 40px;
+		display: flex;
+		justify-content: center;
+		@include mediaq(tb){
+			flex-flow:column nowrap;
+			margin: 30px 0;
+		}
+		.form-left{
+			margin-right: 50px;
+			@include mediaq(tb){
+				margin-right:0;
+				margin-bottom: 30px;
+			}
+			.name{
+				@include form;
+				@include hw(50px,400px);
+				margin-bottom: 20px;
+				@include mediaq(tb){
+					width: 80%;
+				}
+			}
+			.e-mail{
+				@include form;
+				@include hw(50px,400px);
+				@include mediaq(tb){
+					width: 80%;
+				}
+			}
+		}
+		.inquiry{
+			@include hw(120px,400px);
+			box-sizing: border-box;
+			font-size:16px;
+			@include mediaq(tb){
+					width: 80%;
+			}
+		}
+		button{
+			font-size:20px;
+			padding: 5px 40px;
+			box-sizing: border-box;
+			text-align: center;
+		}
+	}
+	.submit{
+		color: $white;
+		background-color: $ultramarine;
+		height:50px;
+		font-size: 18px;
+		border-radius: 10px;
+		border:2px solid $ultramarine;
+		box-sizing: border-box;
+		transition-duration: 500ms;
+		padding: 10px 20px;
+		&:hover{
+		background-color: $white;
+		color:$ultramarine;
+		border-color: $ultramarine;
+		transition-duration: 500ms;
+		}
+	}
+}
+// contactここまで
+
+
+footer{
+	@include flex-center;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 18px;
+	padding-top: 5px;
+	color: #fff;
+	background-color: #233f51;
+	@include mediaq(sp){
+		justify-content: center;
+	}
+	.footer-right{
+		margin-right: 80px;
+		@include mediaq(sp){
+			margin-right: 0;
+		}
+	}
+	.icon{
+		@include mediaq(sp){
+			display: none;
+		}
+	}
+}
